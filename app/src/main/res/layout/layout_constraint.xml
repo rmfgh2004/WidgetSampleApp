@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <View
+        android:id="@+id/v_profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#FF666666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="My name"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/v_profile"
+        app:layout_constraintTop_toTopOf="@id/v_profile" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="4월 20일"
+        app:layout_constraintBottom_toBottomOf="@id/v_profile"
+        app:layout_constraintStart_toEndOf="@id/v_profile" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="여기에는 제목을 입력 부탁드립니다!"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_profile" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="hello!\nthis is subtext input\ndetail please"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_mid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".5" />
+
+    <View
+        android:id="@+id/v_red"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#FFFF0000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_mid" />
+
+    <View
+        android:id="@+id/v_blue"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#FF0000FF"
+        app:layout_constraintEnd_toStartOf="@id/v_green"
+        app:layout_constraintHorizontal_bias=".8"
+        app:layout_constraintStart_toEndOf="@id/v_red"
+        app:layout_constraintTop_toBottomOf="@id/gl_mid" />
+
+    <View
+        android:id="@+id/v_green"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#FF00FF00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_mid" />
+
+    <View
+        android:id="@+id/v_black"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#FF000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_red"
+        app:layout_constraintVertical_bias=".2" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/br_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="v_red, v_green, v_blue, v_black" />
+
+    <View
+        android:id="@+id/v_yellow"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:background="#FFFFFF00"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/br_block" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
