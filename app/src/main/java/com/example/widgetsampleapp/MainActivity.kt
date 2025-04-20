@@ -3,6 +3,7 @@ package com.example.widgetsampleapp
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.widget_button)
+        setContentView(R.layout.widget_select)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -24,5 +25,15 @@ class MainActivity : AppCompatActivity() {
 //        ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, countries).also { adapter ->
 //            textView.setAdapter(adapter);
 //        }
+
+        val spinner = findViewById<Spinner>(R.id.sp_country)
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.countries_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
     }
 }
