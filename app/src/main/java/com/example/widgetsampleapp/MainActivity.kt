@@ -3,6 +3,8 @@ package com.example.widgetsampleapp
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.NumberPicker
 import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.widget_select)
+        setContentView(R.layout.widget_picker)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -26,14 +28,29 @@ class MainActivity : AppCompatActivity() {
 //            textView.setAdapter(adapter);
 //        }
 
-        val spinner = findViewById<Spinner>(R.id.sp_country)
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.countries_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
+//        val spinner = findViewById<Spinner>(R.id.sp_country)
+//        ArrayAdapter.createFromResource(
+//            this,
+//            R.array.countries_array,
+//            android.R.layout.simple_spinner_item
+//        ).also { adapter ->
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            spinner.adapter = adapter
+//        }
+
+        findViewById<Button>(R.id.btn_time).setOnClickListener {
+            TimePickerFragment().show(supportFragmentManager, "timePicker")
         }
+
+        findViewById<Button>(R.id.btn_date).setOnClickListener {
+            DatePickerFragment().show(supportFragmentManager, "datePicker")
+        }
+
+        val numberPicker = findViewById<NumberPicker>(R.id.pk_number)
+        numberPicker.maxValue = 100
+        numberPicker.minValue = 0
+        numberPicker.value = 5
+
+
     }
 }
