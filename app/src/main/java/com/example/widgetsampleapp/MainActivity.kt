@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.ExpandableListView
+import android.widget.FrameLayout
 import android.widget.ListView
 import android.widget.NumberPicker
 import android.widget.Spinner
@@ -17,19 +18,20 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.widget_view_pager2)
+        setContentView(R.layout.layout_tab)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        setViewPagerWidget()
+        setTabLayout()
     }
 
     private fun setTextWidget() {
@@ -172,5 +174,30 @@ class MainActivity : AppCompatActivity() {
             }
         })
         adapter.submitList(dataSet)
+    }
+
+    private fun setTabLayout() {
+        val tabLayoutContainer : FrameLayout = findViewById(R.id.tab_layout_container)
+        val tabLayout : TabLayout = findViewById(R.id.tab_layout)
+
+        tabLayoutContainer.setBackgroundResource(R.color.red)
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab!!.position) {
+                    0 -> tabLayoutContainer.setBackgroundResource(R.color.red)
+                    1 -> tabLayoutContainer.setBackgroundResource(R.color.green)
+                    2 -> tabLayoutContainer.setBackgroundResource(R.color.blue)
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
     }
 }
