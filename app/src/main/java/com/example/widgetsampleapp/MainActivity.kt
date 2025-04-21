@@ -9,25 +9,27 @@ import android.widget.ExpandableListView
 import android.widget.ListView
 import android.widget.NumberPicker
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.widget_nested_scroll_view)
+        setContentView(R.layout.widget_view_pager2)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        setNestedScrollViewWidget()
+        setViewPagerWidget()
     }
 
     private fun setTextWidget() {
@@ -149,5 +151,26 @@ class MainActivity : AppCompatActivity() {
 
     private fun setNestedScrollViewWidget() {
         setRecyclerViewWidget()
+    }
+
+    private fun setViewPagerWidget() {
+        val dataSet = mutableListOf<String>(
+            "Red",
+            "Blue",
+            "Yellow"
+        )
+
+        val indicator : TextView = findViewById(R.id.tv_indicator)
+        val adapter = SamplePagerAdapter()
+        val pager : ViewPager2 = findViewById(R.id.pager_normal)
+        pager.adapter = adapter
+        pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                indicator.text = "${position + 1} / 3"
+            }
+        })
+        adapter.submitList(dataSet)
     }
 }
